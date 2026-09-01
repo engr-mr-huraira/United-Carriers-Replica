@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>United Carriers — Every Leg of the Journey</title>
+  <meta name="description" content="Freight forwarding, land transport, and customs brokerage unified across APAC.">
+
+  <!-- BT Steinhart substitute: Syne (geometric industrial) + IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/hero.css?v=dooted4">
+</head>
+<body>
+
+  <section class="hero" id="hero" aria-label="Hero">
+
+    <!-- Cinematic background -->
+    <div class="hero-bg" role="presentation" aria-hidden="true"></div>
+    <div class="hero-overlay" role="presentation" aria-hidden="true"></div>
+
+    <!-- Top news bar -->
+    <div class="news-bar">
+      <div class="news-bar__inner container-fluid">
+        <div class="news-bar__left">
+          <span class="news-bar__label">NEWS:</span>
+          <div class="news-ticker" aria-live="polite">
+            <div class="news-ticker__track"></div>
+          </div>
+        </div>
+        <div class="news-bar__right">
+          <a href="#" class="news-bar__link">CARBON CALCULATOR</a>
+          <span class="news-bar__sep" aria-hidden="true">|</span>
+          <a href="#" class="news-bar__link">LIVE TRACKING PORTAL</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main navigation -->
+    <header class="navbar">
+      <div class="navbar__inner container-fluid">
+        <a href="#" class="navbar__logo" aria-label="United Carriers home">UNITEDCARRIERS</a>
+
+        <button class="navbar__toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+          <span class="navbar__toggle-bar"></span>
+          <span class="navbar__toggle-bar"></span>
+          <span class="navbar__toggle-bar"></span>
+        </button>
+
+        <nav class="navbar__nav" id="nav-menu" aria-label="Primary">
+          <ul class="navbar__links">
+            <li><a href="#" class="nav-link scramble-link" data-text="ABOUT">ABOUT</a></li>
+            <li><a href="#" class="nav-link scramble-link" data-text="SERVICES">SERVICES</a></li>
+            <li><a href="#" class="nav-link scramble-link" data-text="INDUSTRIES">INDUSTRIES</a></li>
+            <li><a href="#" class="nav-link scramble-link" data-text="INSIGHTS">INSIGHTS</a></li>
+            <li><a href="#" class="nav-link scramble-link" data-text="CONTACT">CONTACT</a></li>
+          </ul>
+          <div class="navbar__mobile-utils">
+            <a href="#" class="navbar__utility">CARBON CALCULATOR</a>
+            <a href="#" class="navbar__utility">LIVE TRACKING PORTAL</a>
+            <a href="#" class="navbar__cta btn btn--primary btn--sm">WORK WITH US</a>
+          </div>
+        </nav>
+
+        <div class="navbar__utilities">
+          <a href="#" class="navbar__cta btn btn--primary btn--sm">WORK WITH US</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero body: content left, globe right -->
+    <div class="hero-body container-fluid">
+      <div class="hero-content">
+        <p class="hero-eyebrow">ONE OPERATOR</p>
+        <h1 class="hero-heading">
+          <span class="hero-heading__line">EVERY</span>
+          <span class="hero-heading__line">LEG OF THE</span>
+          <span class="hero-heading__line">JOURNEY</span>
+        </h1>
+        <p class="hero-description">
+          Freight forwarding, land transport, and<br>
+          customs brokerage, unified across APAC<br>
+          under one accountable team.
+        </p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn--primary">TALK WITH US</a>
+          <a href="#" class="btn btn--ghost">OUR SERVICES</a>
+        </div>
+      </div>
+
+      <!-- DOOTED GLOBE: Hero right-side container -->
+      <div class="hero-globe-wrap" aria-hidden="true">
+        <div class="hero-globe" id="hero-globe-container">
+          <canvas id="webgl-canvas"></canvas>
+        </div>
+        <div class="hero-globe-cursor-ring" id="hero-globe-cursor-ring"></div>
+      </div>
+    </div>
+
+  </section>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script src="js/news-ticker.js"></script>
+  <script src="js/nav-scramble.js"></script>
+  <script type="module" src="js/main.js?v=dooted2"></script>
+</body>
+</html>

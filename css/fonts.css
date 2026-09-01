@@ -1,0 +1,27 @@
+/* BT Steinhart — drop licensed .woff2 files into Assets/fonts/ to activate */
+@font-face {
+  font-family: 'BT Steinhart';
+  src: url('../Assets/fonts/BTSteinhart-Bold.woff2') format('woff2'),
+       url('../Assets/fonts/BTSteinhart-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BT Steinhart';
+  src: url('../Assets/fonts/BTSteinhart-ExtraBold.woff2') format('woff2'),
+       url('../Assets/fonts/BTSteinhart-ExtraBold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BT Steinhart';
+  src: url('../Assets/fonts/BTSteinhart-Regular.woff2') format('woff2'),
+       url('../Assets/fonts/BTSteinhart-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
