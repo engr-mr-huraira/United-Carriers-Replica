@@ -37,7 +37,7 @@ body {
   font-family: var(--font-display);
   background: var(--color-black);
   color: var(--color-white);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 a {
@@ -468,26 +468,27 @@ img {
 
 .hero-globe-wrap {
   position: absolute;
-  top: calc(-1 * var(--nav-height) * 0.55);
+  top: calc(var(--news-height) + var(--nav-height) + 0.375rem);
   right: 0;
-  width: 50%;
-  height: calc(100% + var(--nav-height) * 0.55);
+  bottom: clamp(0.75rem, 2vh, 1.5rem);
+  width: 55%;
+  height: auto;
   min-height: 0;
   max-height: none;
   padding-left: clamp(2.5rem, 10vw, 6rem);
   pointer-events: none;
   z-index: 8;
-  align-self: center;
+  align-self: auto;
   overflow: visible;
 }
 
 .hero-globe {
   position: absolute;
   right: clamp(-38%, -22vw, 22%);
-  top: 47%;
-  transform: translateY(-50%);
-  width: clamp(420px, 68vw, 950px);
-  height: clamp(420px, 68vw, 950px);
+  top: -35%;
+  transform: none;
+  width: clamp(400px, 62vw, 960px);
+  height: clamp(400px, 62vw, 960px);
   pointer-events: auto;
   overflow: visible;
 }
@@ -501,29 +502,11 @@ img {
 }
 
 .hero-globe .hero-globe__labels,
-.hero-globe > div:last-of-type:not(.hero-globe-cursor-ring) {
+.hero-globe > div:last-of-type {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 1;
-}
-
-.hero-globe-cursor-ring {
-  position: fixed;
-  width: 40px;
-  height: 40px;
-  border: 1.5px solid rgba(255, 255, 255, 0.85);
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%) scale(0);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 25;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
-}
-
-.hero-globe-cursor-ring.active {
-  opacity: 1;
 }
 
 .globe-label {

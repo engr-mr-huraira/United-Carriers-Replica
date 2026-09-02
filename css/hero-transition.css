@@ -1,0 +1,96 @@
+/* ============================================================
+   HERO → ABOUT — hero stays pinned; sections scroll over it
+   body { overflow-x:clip } in hero.css breaks position:fixed —
+   clip moved to html so fixed pin works on viewport.
+   ============================================================ */
+
+:root {
+  --hero-progress: 0;
+  --hero-transition-length: 100vh;
+  --hero-transition-length: 100dvh;
+}
+
+html {
+  overflow-x: clip;
+}
+
+body {
+  overflow-x: visible;
+  overflow-y: visible;
+}
+
+.hero-scroll {
+  position: relative;
+  height: calc(var(--hero-transition-length) * 2);
+  pointer-events: none;
+}
+
+.hero-scroll__pin {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--hero-transition-length);
+  z-index: 20;
+  pointer-events: auto;
+}
+
+.hero-scroll__pin.is-hero-pinned {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: var(--hero-transition-length);
+  z-index: 20;
+}
+
+.hero-scroll__pin.is-hero-pinned-end {
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: var(--hero-transition-length);
+}
+
+.hero-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  will-change: opacity;
+  opacity: calc(1 - var(--hero-progress) * 0.2);
+}
+
+.hero-scene .hero-body {
+  flex: 1;
+  min-height: 0;
+  padding-top: calc(var(--news-height) + var(--nav-height));
+}
+
+.hero-chrome {
+  position: relative;
+  z-index: 40;
+  flex-shrink: 0;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --hero-progress: 0 !important;
+  }
+
+  .hero-scene {
+    opacity: 1 !important;
+    will-change: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-scroll {
+    height: calc(var(--hero-transition-length) * 2);
+  }
+}

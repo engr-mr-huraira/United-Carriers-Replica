@@ -1,0 +1,196 @@
+/* ============================================================
+   PAGE-LOAD TEXT REVEAL — Navbar + Hero
+   GPU-friendly · cinematic · page-load only
+   ============================================================ */
+
+:root {
+  --reveal-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --reveal-duration: 0.65s;
+  --reveal-blue: #183dff;
+  --reveal-blue-soft: #4d6bff;
+}
+
+/* ── Initial hidden state (before load) ── */
+
+.reveal-item {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: transform, opacity;
+}
+
+.reveal-mask {
+  display: block;
+  overflow: hidden;
+}
+
+.reveal-mask--inline {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  max-width: 100%;
+}
+
+.hero-actions .reveal-mask__inner {
+  display: inline-block;
+}
+
+.navbar__links > .reveal-item {
+  display: flex;
+  align-items: center;
+}
+
+.reveal-mask__inner {
+  display: block;
+  opacity: 0;
+  transform: translateY(1.05em);
+  clip-path: inset(100% 0 0 0);
+  will-change: transform, opacity, clip-path;
+}
+
+/* ── Loaded state ── */
+
+body.is-loaded .reveal-item {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--reveal-duration) var(--reveal-ease),
+    transform var(--reveal-duration) var(--reveal-ease);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+body.is-loaded .reveal-mask__inner {
+  opacity: 1;
+  transform: translateY(0);
+  clip-path: inset(0 0 0 0);
+  transition:
+    opacity 0.68s var(--reveal-ease),
+    transform 0.72s var(--reveal-ease),
+    clip-path 0.72s var(--reveal-ease);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+/* ── Hero heading: white → blue gradient sweep ── */
+
+.hero-heading__text {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  line-height: inherit;
+}
+
+.hero-heading__text--blue {
+  display: block;
+  background-image: linear-gradient(
+    105deg,
+    #ffffff 0%,
+    #ffffff 38%,
+    var(--reveal-blue) 50%,
+    var(--reveal-blue-soft) 56%,
+    #ffffff 64%,
+    #ffffff 100%
+  );
+  background-size: 320% 100%;
+  background-position: 115% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+body.is-loaded .hero-heading__text--blue {
+  animation: heroBlueSweep 0.95s var(--reveal-ease) var(--reveal-delay, 0.45s) forwards;
+}
+
+.hero-heading__line:nth-child(2) .hero-heading__text--blue {
+  animation-name: heroBlueSweepAccent;
+}
+
+.hero-heading__line:nth-child(3) .hero-heading__text--blue {
+  animation-name: heroBlueSweepTail;
+}
+
+@keyframes heroBlueSweep {
+  0% {
+    background-position: 115% 50%;
+  }
+  55% {
+    background-position: 42% 50%;
+  }
+  100% {
+    background-position: 8% 50%;
+  }
+}
+
+@keyframes heroBlueSweepAccent {
+  0% {
+    background-position: 115% 50%;
+  }
+  50% {
+    background-position: 38% 50%;
+  }
+  100% {
+    background-position: -12% 50%;
+  }
+}
+
+@keyframes heroBlueSweepTail {
+  0% {
+    background-position: 115% 50%;
+  }
+  55% {
+    background-position: 48% 50%;
+  }
+  100% {
+    background-position: 2% 50%;
+  }
+}
+
+/* ── Reduced motion ── */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-item,
+  .reveal-mask__inner {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+    animation: none !important;
+    will-change: auto;
+  }
+
+  .hero-heading__text--blue {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: var(--color-white);
+  }
+}
+
+html.reveal-reduced .reveal-item,
+html.reveal-reduced .reveal-mask__inner {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+  transition: none !important;
+  animation: none !important;
+  will-change: auto;
+}
+
+html.reveal-reduced .hero-heading__text--blue {
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  color: var(--color-white);
+}
+
+/* No-JS fallback */
+html:not(.js) .reveal-item,
+html:not(.js) .reveal-mask__inner {
+  opacity: 1;
+  transform: none;
+  clip-path: none;
+}
+
+html:not(.js) .hero-heading__text--blue {
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  color: var(--color-white);
+}

@@ -842,7 +842,6 @@ async function initScene(container) {
   // ── Mouse interaction ──
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
-  const cursorRing = document.getElementById("hero-globe-cursor-ring");
   const invGlobeMatrix = new THREE.Matrix4();
   const localRayOrigin = new THREE.Vector3();
   const localRayDir = new THREE.Vector3();
@@ -881,23 +880,16 @@ async function initScene(container) {
       isHovering = true;
       targetRingPos.copy(localHit);
       targetRingScale = 1;
-      if (cursorRing) {
-        cursorRing.style.left = `${e.clientX}px`;
-        cursorRing.style.top = `${e.clientY}px`;
-        cursorRing.classList.add("active");
-      }
       return;
     }
 
     isHovering = false;
     targetRingScale = 0;
-    if (cursorRing) cursorRing.classList.remove("active");
   }
 
   function onPointerLeave() {
     isHovering = false;
     targetRingScale = 0;
-    if (cursorRing) cursorRing.classList.remove("active");
   }
 
   canvas.addEventListener("pointermove", onPointerMove);
@@ -953,11 +945,6 @@ async function initScene(container) {
       mouseRing3D.scale.setScalar(0.8 + ringScale * 0.4);
     } else {
       mouseRing3D.visible = false;
-    }
-
-    // CSS cursor ring scale
-    if (cursorRing) {
-      cursorRing.style.transform = `translate(-50%, -50%) scale(${ringScale})`;
     }
 
     controls.update();

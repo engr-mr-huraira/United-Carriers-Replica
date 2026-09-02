@@ -13,93 +13,209 @@
 
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/hero.css?v=dooted4">
+  <link rel="stylesheet" href="css/hero-transition.css?v=pin3">
+  <link rel="stylesheet" href="css/about.css">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/cursor.css">
+
+  <script>
+    document.documentElement.classList.add('js');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('reveal-reduced');
+    }
+  </script>
 </head>
 <body>
 
-  <section class="hero" id="hero" aria-label="Hero">
+  <div class="custom-cursor" id="custom-cursor" aria-hidden="true">
+    <svg class="custom-cursor__svg" width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+      <circle class="custom-cursor__track" cx="22" cy="22" r="19"></circle>
+      <circle class="custom-cursor__progress" cx="22" cy="22" r="19"></circle>
+    </svg>
+    <span class="custom-cursor__dot"></span>
+  </div>
 
-    <!-- Cinematic background -->
-    <div class="hero-bg" role="presentation" aria-hidden="true"></div>
-    <div class="hero-overlay" role="presentation" aria-hidden="true"></div>
+  <div class="hero-scroll" id="hero-scroll">
+    <div class="hero-scroll__pin">
+      <section class="hero" id="hero" aria-label="Hero">
 
-    <!-- Top news bar -->
-    <div class="news-bar">
-      <div class="news-bar__inner container-fluid">
-        <div class="news-bar__left">
-          <span class="news-bar__label">NEWS:</span>
-          <div class="news-ticker" aria-live="polite">
-            <div class="news-ticker__track"></div>
+        <!-- Scene: bg + content (scroll-animated) -->
+        <div class="hero-scene" id="hero-scene">
+          <div class="hero-bg" role="presentation" aria-hidden="true"></div>
+          <div class="hero-overlay" role="presentation" aria-hidden="true"></div>
+
+          <div class="hero-body container-fluid">
+            <div class="hero-content">
+              <p class="hero-eyebrow reveal-mask" style="--reveal-delay: 0.35s">
+                <span class="reveal-mask__inner">ONE OPERATOR</span>
+              </p>
+              <h1 class="hero-heading">
+                <span class="hero-heading__line reveal-mask" style="--reveal-delay: 0.45s">
+                  <span class="hero-heading__text hero-heading__text--blue reveal-mask__inner">EVERY</span>
+                </span>
+                <span class="hero-heading__line reveal-mask" style="--reveal-delay: 0.51s">
+                  <span class="hero-heading__text hero-heading__text--blue reveal-mask__inner">LEG OF THE</span>
+                </span>
+                <span class="hero-heading__line reveal-mask" style="--reveal-delay: 0.57s">
+                  <span class="hero-heading__text hero-heading__text--blue reveal-mask__inner">JOURNEY</span>
+                </span>
+              </h1>
+              <p class="hero-description reveal-mask" style="--reveal-delay: 0.65s">
+                <span class="reveal-mask__inner">
+                  Freight forwarding, land transport, and<br>
+                  customs brokerage, unified across APAC<br>
+                  under one accountable team.
+                </span>
+              </p>
+              <div class="hero-actions">
+                <span class="reveal-mask reveal-mask--inline" style="--reveal-delay: 0.8s">
+                  <span class="reveal-mask__inner">
+                    <a href="#" class="btn btn--primary">TALK WITH US</a>
+                  </span>
+                </span>
+                <span class="reveal-mask reveal-mask--inline" style="--reveal-delay: 0.88s">
+                  <span class="reveal-mask__inner">
+                    <a href="#" class="btn btn--ghost">OUR SERVICES</a>
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            <div class="hero-globe-wrap" aria-hidden="true">
+              <div class="hero-globe" id="hero-globe-container">
+                <canvas id="webgl-canvas"></canvas>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="news-bar__right">
-          <a href="#" class="news-bar__link">CARBON CALCULATOR</a>
-          <span class="news-bar__sep" aria-hidden="true">|</span>
-          <a href="#" class="news-bar__link">LIVE TRACKING PORTAL</a>
-        </div>
-      </div>
-    </div>
 
-    <!-- Main navigation -->
-    <header class="navbar">
-      <div class="navbar__inner container-fluid">
-        <a href="#" class="navbar__logo" aria-label="United Carriers home">UNITEDCARRIERS</a>
-
-        <button class="navbar__toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
-          <span class="navbar__toggle-bar"></span>
-          <span class="navbar__toggle-bar"></span>
-          <span class="navbar__toggle-bar"></span>
-        </button>
-
-        <nav class="navbar__nav" id="nav-menu" aria-label="Primary">
-          <ul class="navbar__links">
-            <li><a href="#" class="nav-link scramble-link" data-text="ABOUT">ABOUT</a></li>
-            <li><a href="#" class="nav-link scramble-link" data-text="SERVICES">SERVICES</a></li>
-            <li><a href="#" class="nav-link scramble-link" data-text="INDUSTRIES">INDUSTRIES</a></li>
-            <li><a href="#" class="nav-link scramble-link" data-text="INSIGHTS">INSIGHTS</a></li>
-            <li><a href="#" class="nav-link scramble-link" data-text="CONTACT">CONTACT</a></li>
-          </ul>
-          <div class="navbar__mobile-utils">
-            <a href="#" class="navbar__utility">CARBON CALCULATOR</a>
-            <a href="#" class="navbar__utility">LIVE TRACKING PORTAL</a>
-            <a href="#" class="navbar__cta btn btn--primary btn--sm">WORK WITH US</a>
+        <!-- Chrome: navbar stable during transition -->
+        <div class="hero-chrome">
+          <div class="news-bar">
+            <div class="news-bar__inner container-fluid">
+              <div class="news-bar__left">
+                <span class="news-bar__label">NEWS:</span>
+                <div class="news-ticker" aria-live="polite">
+                  <div class="news-ticker__track"></div>
+                </div>
+              </div>
+              <div class="news-bar__right">
+                <a href="#" class="news-bar__link">CARBON CALCULATOR</a>
+                <span class="news-bar__sep" aria-hidden="true">|</span>
+                <a href="#" class="news-bar__link">LIVE TRACKING PORTAL</a>
+              </div>
+            </div>
           </div>
-        </nav>
 
-        <div class="navbar__utilities">
-          <a href="#" class="navbar__cta btn btn--primary btn--sm">WORK WITH US</a>
-        </div>
-      </div>
-    </header>
+          <header class="navbar">
+            <div class="navbar__inner container-fluid">
+              <a href="#" class="navbar__logo reveal-item" style="--reveal-delay: 0.1s" aria-label="United Carriers home">UNITEDCARRIERS</a>
 
-    <!-- Hero body: content left, globe right -->
-    <div class="hero-body container-fluid">
-      <div class="hero-content">
-        <p class="hero-eyebrow">ONE OPERATOR</p>
-        <h1 class="hero-heading">
-          <span class="hero-heading__line">EVERY</span>
-          <span class="hero-heading__line">LEG OF THE</span>
-          <span class="hero-heading__line">JOURNEY</span>
-        </h1>
-        <p class="hero-description">
-          Freight forwarding, land transport, and<br>
-          customs brokerage, unified across APAC<br>
-          under one accountable team.
-        </p>
-        <div class="hero-actions">
-          <a href="#" class="btn btn--primary">TALK WITH US</a>
-          <a href="#" class="btn btn--ghost">OUR SERVICES</a>
-        </div>
-      </div>
+              <button class="navbar__toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+                <span class="navbar__toggle-bar"></span>
+                <span class="navbar__toggle-bar"></span>
+                <span class="navbar__toggle-bar"></span>
+              </button>
 
-      <!-- DOOTED GLOBE: Hero right-side container -->
-      <div class="hero-globe-wrap" aria-hidden="true">
-        <div class="hero-globe" id="hero-globe-container">
-          <canvas id="webgl-canvas"></canvas>
+              <nav class="navbar__nav" id="nav-menu" aria-label="Primary">
+                <ul class="navbar__links">
+                  <li class="reveal-item" style="--reveal-delay: 0.15s"><a href="#about" class="nav-link scramble-link" data-text="ABOUT">ABOUT</a></li>
+                  <li class="reveal-item" style="--reveal-delay: 0.2s"><a href="#" class="nav-link scramble-link" data-text="SERVICES">SERVICES</a></li>
+                  <li class="reveal-item" style="--reveal-delay: 0.25s"><a href="#" class="nav-link scramble-link" data-text="INDUSTRIES">INDUSTRIES</a></li>
+                  <li class="reveal-item" style="--reveal-delay: 0.3s"><a href="#" class="nav-link scramble-link" data-text="INSIGHTS">INSIGHTS</a></li>
+                  <li class="reveal-item" style="--reveal-delay: 0.33s"><a href="#" class="nav-link scramble-link" data-text="CONTACT">CONTACT</a></li>
+                </ul>
+                <div class="navbar__mobile-utils">
+                  <a href="#" class="navbar__utility">CARBON CALCULATOR</a>
+                  <a href="#" class="navbar__utility">LIVE TRACKING PORTAL</a>
+                  <a href="#" class="navbar__cta btn btn--primary btn--sm">WORK WITH US</a>
+                </div>
+              </nav>
+
+              <div class="navbar__utilities reveal-item" style="--reveal-delay: 0.35s">
+                <a href="#" class="navbar__cta btn btn--primary btn--sm">WORK WITH US</a>
+              </div>
+            </div>
+          </header>
         </div>
-        <div class="hero-globe-cursor-ring" id="hero-globe-cursor-ring"></div>
-      </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- About — sticky left / scrolling right -->
+  <section class="about" id="about" aria-label="About United Carriers">
+    <div class="about__bg" role="presentation" aria-hidden="true">
+      <img
+        class="about__bg-img"
+        src="Assets/about-bg.png"
+        alt=""
+        width="1728"
+        height="1537"
+        decoding="async"
+      >
     </div>
 
+    <div class="about__surface">
+      <div class="about__inner container-fluid">
+      <div class="about__grid">
+
+        <div class="about__col-left">
+          <div class="about__orbit" aria-hidden="true">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="14" cy="14" r="12.5" stroke="rgba(12,12,12,0.18)" stroke-width="1"/>
+              <circle cx="14" cy="14" r="2.5" fill="#0c0c0c"/>
+            </svg>
+          </div>
+          <div class="about__image-wrap">
+            <img class="about__image" src="Assets/about-left-img.jpg" alt="Highway interchange with freight traffic" width="520" height="325" loading="lazy">
+          </div>
+          <h2 class="about__heading">
+            <span class="about__heading-line about__heading-line--muted">WE MOVE</span>
+            <span class="about__heading-line about__heading-line--muted">FREIGHT.</span>
+            <span class="about__heading-line about__heading-line--dark">WE OWN</span>
+            <span class="about__heading-line about__heading-line--dark">THE OUTCOME.</span>
+          </h2>
+        </div>
+
+        <div class="about__col-right">
+          <p class="about__intro about-reveal">
+            With every service under one roof and one accountable team, your supply chain moves the way your business demands: predictably, transparently, and without excuses.
+          </p>
+          <p class="about__intro about-reveal">
+            That means no finger-pointing between vendors. No delays lost in handoffs. Just one team, accountable from origin to destination.
+          </p>
+          <div class="about__cta-wrap about-reveal">
+            <a href="#" class="btn--outline-light">LEARN MORE ABOUT US</a>
+          </div>
+
+          <div class="about__stats">
+            <div class="about__stat about-reveal">
+              <p class="about__stat-value">2,500+</p>
+              <p class="about__stat-label">Shipments per month</p>
+            </div>
+            <div class="about__stat about-reveal">
+              <p class="about__stat-value">98.2%</p>
+              <p class="about__stat-label">On-time delivery rate</p>
+            </div>
+            <div class="about__stat about-reveal">
+              <p class="about__stat-value">8+</p>
+              <p class="about__stat-label">Years in operation</p>
+            </div>
+          </div>
+
+          <p class="about__footer-line about-reveal">From countless journeys, clarity emerges.</p>
+        </div>
+
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="site-section site-section--dark" id="services" aria-label="Services">
+    <div class="container-fluid">
+      <p class="site-section__eyebrow">Integrated logistics</p>
+      <h2 class="site-section__title">One operator across every mode</h2>
+    </div>
   </section>
 
   <script type="importmap">
@@ -111,6 +227,9 @@
   }
   </script>
 
+  <script src="js/page-reveal.js"></script>
+  <script src="js/hero-scroll-transition.js?v=pin3"></script>
+  <script src="js/custom-cursor.js"></script>
   <script src="js/news-ticker.js"></script>
   <script src="js/nav-scramble.js"></script>
   <script type="module" src="js/main.js?v=dooted2"></script>
